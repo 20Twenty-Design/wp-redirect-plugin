@@ -4,7 +4,7 @@ Tags: 410, gone, redirect, 301, csv
 Requires at least: 5.6
 Tested up to: 6.7
 Requires PHP: 7.2
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -69,6 +69,9 @@ Yes. Destinations are set by an administrator, so external URLs are allowed.
 3. Settings.
 
 == Changelog ==
+
+= 1.1.1 =
+* Maintenance release to confirm updates arrive from GitHub.
 
 = 1.1.0 =
 * Updates are now delivered from GitHub releases through the normal WordPress update screens.

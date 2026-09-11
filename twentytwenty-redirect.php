@@ -3,7 +3,7 @@
  * Plugin Name:       20Twenty Redirect
  * Plugin URI:        https://example.com/20twenty-redirect
  * Description:       Retire dead URLs in bulk. Import a CSV of links and serve them as 410 Gone, or flip any line item to a 301/302/307 redirect. Master on/off switch, manual add/edit/delete, hit tracking, CSV export.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Requires at least: 5.6
  * Requires PHP:      7.2
  * Author:            20Twenty
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'TTR_VERSION', '1.1.0' );
+define( 'TTR_VERSION', '1.1.1' );
 define( 'TTR_FILE', __FILE__ );
 define( 'TTR_DIR', plugin_dir_path( __FILE__ ) );
 define( 'TTR_URL', plugin_dir_url( __FILE__ ) );
