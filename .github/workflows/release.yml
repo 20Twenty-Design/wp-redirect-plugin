@@ -1,0 +1,43 @@
+name: Release
+
+# Push a tag like v1.1.0 to build twentytwenty-redirect.zip and publish it as a GitHub release.
+# Installed copies of the plugin find the release and offer the update.
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check that every version string matches the tag
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          header=$(grep -m1 -E '^[[:space:]]*\*[[:space:]]*Version:' twentytwenty-redirect.php | awk '{print $NF}')
+          constant=$(grep -m1 "define( 'TTR_VERSION'" twentytwenty-redirect.php | sed -E "s/.*'([^']+)'.*/\1/")
+          stable=$(grep -m1 -E '^Stable tag:' readme.txt | awk '{print $NF}')
+          echo "tag=$tag header=$header TTR_VERSION=$constant stable=$stable"
+          if [ "$tag" != "$header" ] || [ "$tag" != "$constant" ] || [ "$tag" != "$stable" ]; then
+            echo "::error::Tag, plugin header Version, TTR_VERSION and readme Stable tag must all match."
+            exit 1
+          fi
+
+      - name: Build zip
+        run: |
+          mkdir -p build/twentytwenty-redirect
+          rsync -a --exclude-from=.distignore ./ build/twentytwenty-redirect/
+          cd build
+          zip -rq twentytwenty-redirect.zip twentytwenty-redirect
+          unzip -l twentytwenty-redirect.zip
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" build/twentytwenty-redirect.zip --title "$GITHUB_REF_NAME" --generate-notes

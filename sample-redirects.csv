@@ -1,0 +1,7 @@
+source,target,status,notes
+/old-campaign-2019,,410,Killed after the campaign ended
+/promo/black-friday-2021,,410,Seasonal page
+https://example.com/discontinued-product,,410,Product retired
+/blog/old-post,/blog/new-post,301,Rewritten
+/shop?item=42,/shop/item-42,301,Query strings are matched too
+/temporarily-moved,/staging-page,302,Back next week
